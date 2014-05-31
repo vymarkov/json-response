@@ -39,11 +39,19 @@ if (res.response) {
 }
 
 res.response = function response(status, data, message) {
-    return {
-        status: +status,
-        data: data || null,
-        message: message || null
+    var result = {
+        status: +status
     };
+
+    if (data) {
+        resultdata = data;
+    }
+
+    if (message) {
+        result.message = message;
+    }
+
+    return result;
 };
 
 
@@ -56,7 +64,7 @@ httpStatus.forEach(function(status) {
         length, nameArr;
 
     var respond = function(data, message) {
-        return this.send(this.response(code, data, message));
+        return this.send(this.response(code, data, message), code);
     };
 
     res[code] = respond;
