@@ -38,6 +38,18 @@ if (res.response) {
     return;
 }
 
+res.error = function(status, data) {
+    var result = {
+        status: +status
+    };
+
+    if (data) {
+        result.error = data;
+    }
+
+    return result;
+};
+
 res.response = function response(status, data, message) {
     var result = {
         status: +status
